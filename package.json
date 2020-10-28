@@ -1,0 +1,40 @@
+{
+  "name": "todoproj",
+  "version": "1.0.0",
+  "description": "App for business to write your todo list",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Marharyta Andriukhina",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/cli": "^7.12.1",
+    "@babel/core": "^7.12.3",
+    "@babel/node": "^7.12.1",
+    "@babel/preset-env": "^7.12.1",
+    "backbone": "^1.4.0",
+    "browser-sync": "^2.26.13",
+    "css-loader": "^5.0.0",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^7.0.1",
+    "gulp-babel": "^8.0.0",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-group-css-media-queries": "^1.2.2",
+    "gulp-if": "^3.0.0",
+    "gulp-rm": "^2.0.0",
+    "gulp-sass-glob": "^1.1.0",
+    "gulp-smile-px2rem": "^0.1.0",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-uglify": "^3.0.2",
+    "jquery": "^3.5.1",
+    "style-loader": "^2.0.0",
+    "webpack": "^5.3.0",
+    "webpack-cli": "^4.1.0",
+    "gulp-sass": "^4.1.0"
+  },
+  "devDependencies": {
+    "node-sass": "^4.14.1"
+  }
+}

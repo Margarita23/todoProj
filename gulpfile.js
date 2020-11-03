@@ -1,3 +1,5 @@
+'use strict';
+
 const { src, dest, task, series, watch, parallel } = require("gulp");
 const rm = require('gulp-rm');
 const sass = require('gulp-sass');
@@ -54,7 +56,7 @@ task('styles', () => {
 });
 
 task('scripts', () => {
-    return src([...JS_LIBS, 'src/scripts/*.js'])
+    return src([...JS_LIBS, 'src/scripts/**/*.js'])
         .pipe(gulpif(env === 'dev', sourcemaps.init()))
         .pipe(concat('main.min.js'), {newLine: ';'})
         .pipe(gulpif(env === 'prod', babel({
@@ -78,7 +80,7 @@ task('server', () => {
 task('watch', () => {
     watch('./src/styles/**/*.scss', series('styles'));  
     watch('./src/*.html', series('copy:html'));  
-    watch('./src/scripts/*.js', series('scripts'));
+    watch('./src/scripts/**/*.js', series('scripts'));
     watch('./src/assets/images/**/*', series('img'));
 });
 

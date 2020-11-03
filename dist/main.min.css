@@ -152,3 +152,6 @@ template {
 
 [hidden] {
   display: none; }
+
+.change-title__block {
+  display: none; }

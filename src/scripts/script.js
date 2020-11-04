@@ -151,7 +151,6 @@ const TodoListView = Backbone.View.extend({
     initialize: function () {
         this.listenTo(this.collection, "add", this.render);
         this.listenTo(this.collection, "remove", this.render);
-        // this.listenTo(this.collection, "change", this.render);
         this.render();
     },
      
@@ -168,9 +167,6 @@ const TodoListView = Backbone.View.extend({
     removeTodo: function(btn) {
         let idTodo = $(btn.target).attr('data-id');  
         this.collection.remove(this.collection.models[idTodo]);
-
-        // this.collection.models.splice(idTodo, 1);
-        console.log(this.collection.models);
     }
 
 });

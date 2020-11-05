@@ -16,10 +16,6 @@ class TodoListsCollection extends Backbone.Collection {
     }
 }
 
-class TodoView extends Backbone.View {
-    
-}
-
 class TodoListView extends Backbone.View {
 
     events() {
@@ -56,23 +52,12 @@ class TodoListView extends Backbone.View {
     initialize() {
         this.listenTo(this.collection, 'add', this.render);
         this.listenTo(this.collection, 'remove', this.render);
-        // this.listenTo(this, 'change', this.render);
-
-        this.listenTo(this.collection, 'change', this.render);
-
-        // console.log("this");
-        // console.log(this);
-
-        // _.each(this.collection, function(model) {
-        //     console.log(this);
-        //     this.listenTo(model, 'change', this.render);
-        // });
+        this.listenTo(this.collection, 'update', this.render);
         this.render();
     }
      
     render() {
         this.$el.html(this.template(this.collection.models));
-
         $('#app').append(this.el);
         return this;
     }
@@ -87,14 +72,11 @@ class TodoListView extends Backbone.View {
         const cidTodoItem = $(btn.target).attr('data-cid'); 
         const inputVal = this.$('.todo-title__input').eq(idTodoItem).val();
 
-        
         if(!!inputVal) {
             this.hideInputChangeTitleWithBtn(btn);
             setTimeout(() => {
-                this.collection.get({cid: cidTodoItem}).set({title: inputVal});
-                this.$el.html(this.template(this.collection.models));
-                
-                // console.log(this.collection.get({cid: cidTodoItem}));
+                this.collection.get({cid: cidTodoItem}).title = inputVal;
+                this.$el.html(this.template(this.collection.models));                
             }, 300);
         }
     }
@@ -115,7 +97,6 @@ class TodoListView extends Backbone.View {
         }
     }
 }
-
 
 class AppView extends Backbone.View {
 

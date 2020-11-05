@@ -8,7 +8,8 @@
     position: relative;
     display: flex;
     justify-content: center;
-    min-height: 100px; 
+    min-height: 100px;
+    overflow: hidden;
 }
 
 .app__title {
@@ -79,11 +80,11 @@ ul.todo__list {
     margin: 30px 50px;
 }
 
-.todo-item:nth-child(odd){
+.todo__item:nth-child(odd){
     background-color: rgba(172, 194, 243, 0.5);
 }
 
-.todo-item {
+.todo__item {
     position: relative;
     min-height: 50px;
     display: flex;
@@ -105,4 +106,46 @@ ul.todo__list {
     &:hover {
         background-color: #f3acac;
     }
+}
+
+.todo__title {
+    position: absolute;
+}
+
+.todo-title__input {
+    height: 90%;
+    position: absolute;
+    border: none;
+    padding: 10px 195px 10px 20px;
+    box-sizing: border-box;
+    outline: none;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.todo__change-block {
+    position: relative;
+    display: none;
+    width: 350px;
+    height: 70px;
+}
+
+.text__change-btn {
+    border: none;
+    padding: 10px 15px;
+    cursor: point;
+    background-color: #ddd;
+    outline: none;
+    
+    &.text__change-btn--submit:hover {
+        background-color: #aef3ac;
+    }
+
+    &.text__change-btn--cancel:hover {
+        background-color: #f3acac;
+    }
+}
+
+.change__btns.change__btns--todo {
+    right: 0;
 }

@@ -19,7 +19,7 @@ class TodoListsCollection extends Backbone.Collection {
 class TodoListView extends Backbone.View {
 
     events() {
-        return { "click #todo__add-btn" : "addNewTodo",
+        return {
                 "click #todo__remove-btn" : "removeTodo"
         };
     }
@@ -27,12 +27,9 @@ class TodoListView extends Backbone.View {
     template() {
         return _.template(
             `<div class="todo-list__block">
-                <button id="todo__add-btn" class="todo__add-btn" type="submit">Add Todo</button>
-                <ul>
-                <%console.log(this.collection)%>
-
+                <ul class="todo__list">
                 <% this.collection.each((model, index) => { %>
-                    <li class="todo-list">
+                    <li class="todo-item">
                         <h2><%= model.title %></h2>
                         <button data-id="<%= index %>" id="todo__remove-btn" class="todo__remove-btn" type="submit">X</button>
                     </li>
@@ -53,10 +50,6 @@ class TodoListView extends Backbone.View {
         $('#app').append(this.el);
         return this;
     }
-
-    addNewTodo() {
-        this.collection.add(new TodoList());
-    }
     
     removeTodo(btn) {
         let idTodo = $(btn.target).attr('data-id');  
@@ -71,21 +64,25 @@ class AppView extends Backbone.View {
         return {
             'click #app__title' : 'showInputChangeTitleWithBtn',
             'click #change-title__btn--cancel' : 'hideInputChangeTitleWithBtn',
-            'click #change-title__btn--submit' : 'changeTitle'
+            'click #change-title__btn--submit' : 'changeTitle',
+            "click #todo__add-btn" : "addNewTodo",
         };
     }
 
     template(){
         return _.template(
-        `<div>
+        `<div class="app__template">
             <div class="title__block">
                 <h1 id="app__title" class="app__title"><%= this.model.title %></h1>
                 <div class="change-title__block">
                     <input type="text" name="mainTitle" id="change-title__input" class="change-title__input" placeholder="<%= this.model.title %>">
-                    <button id="change-title__btn--submit" class="change-title__btn change-title__btn--submit" type="submit">Change Name</button>
-                    <button id="change-title__btn--cancel" class="change-title__btn change-title__btn--cancel" type="submit">X</button>
+                    <div class="change__btns">
+                        <button id="change-title__btn--submit" class="change-title__btn change-title__btn--submit" type="submit">Change Name</button>
+                        <button id="change-title__btn--cancel" class="change-title__btn change-title__btn--cancel" type="submit">X</button>
+                    </div>
                 </div>
             </div>
+            <button id="todo__add-btn" class="todo__add-btn" type="submit">Add Todo</button>
             <div id="todo-list__block"></div>
         </div>`).bind(this);
     }
@@ -104,14 +101,16 @@ class AppView extends Backbone.View {
     }
 
     showInputChangeTitleWithBtn(){
-        if($(".change-title__block").is(":hidden")){
-            $(".change-title__block").slideToggle(300);
+        if($('.change-title__block').is(':hidden')){
+            $('#app__title').slideUp(300);
+            $('.change-title__block').slideDown(1000);
         }
     }
 
     hideInputChangeTitleWithBtn(){
         if($(".change-title__block").is(":visible")){
             $(".change-title__block").slideToggle(300);
+            $('#app__title').slideDown(1000);
         }
     }
 
@@ -129,6 +128,10 @@ class AppView extends Backbone.View {
 
     renderTodoList() {
         new TodoListView({collection: this._todoList});
+    }
+
+    addNewTodo() {
+        this._todoList.add(new TodoList());
     }
 }
 

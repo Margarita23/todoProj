@@ -159,6 +159,18 @@ template {
   flex-direction: column;
   margin-top: 20px; }
 
+.todo__add-btn {
+  margin: 0 auto;
+  border: 2px solid transparent;
+  padding: 10px 15px;
+  cursor: point;
+  background-color: #ddd;
+  outline: none; }
+  .todo__add-btn:hover {
+    background-color: #aef3ac; }
+  .todo__add-btn:active {
+    border: 2px solid #52e04d; }
+
 .title__block {
   position: relative;
   display: flex;
@@ -201,18 +213,6 @@ template {
     background-color: #aef3ac; }
   .change-title__btn.change-title__btn--cancel:hover {
     background-color: #f3acac; }
-
-.todo__add-btn {
-  margin: 0 auto;
-  border: 2px solid transparent;
-  padding: 10px 15px;
-  cursor: point;
-  background-color: #ddd;
-  outline: none; }
-  .todo__add-btn:hover {
-    background-color: #aef3ac; }
-  .todo__add-btn:active {
-    border: 2px solid #52e04d; }
 
 ul.todo__list {
   list-style-type: none;

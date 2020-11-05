@@ -1,0 +1,76 @@
+
+ul.todo__list {
+    list-style-type: none;
+    padding: 0;
+    margin: 30px 50px;
+}
+
+.todo__item:nth-child(odd){
+    background-color: rgba(172, 194, 243, 0.5);
+}
+
+.todo__item {
+    position: relative;
+    min-height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.todo__remove-btn {
+    border: none;
+    padding: 10px 15px;
+    cursor: point;
+    background-color: #ddd;
+    outline: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    
+
+    &:hover {
+        background-color: #f3acac;
+    }
+}
+
+.todo__title {
+    position: absolute;
+}
+
+.todo-title__input {
+    height: 90%;
+    position: absolute;
+    border: none;
+    padding: 10px 195px 10px 20px;
+    box-sizing: border-box;
+    outline: none;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.todo__change-block {
+    position: relative;
+    display: none;
+    width: 350px;
+    height: 70px;
+}
+
+.text__change-btn {
+    border: none;
+    padding: 10px 15px;
+    cursor: point;
+    background-color: #ddd;
+    outline: none;
+    
+    &.text__change-btn--submit:hover {
+        background-color: #aef3ac;
+    }
+
+    &.text__change-btn--cancel:hover {
+        background-color: #f3acac;
+    }
+}
+
+.change__btns.change__btns--todo {
+    right: 0;
+}

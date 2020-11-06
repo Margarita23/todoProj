@@ -56,7 +56,7 @@ task('styles', () => {
 });
 
 task('scripts', () => {
-    return src([...JS_LIBS, 'src/scripts/**/*.js'])
+    return src([...JS_LIBS, 'src/scripts/models/*.js', 'src/scripts/collections/*.js', 'src/scripts/views/*.js', 'src/scripts/**/*.js'])
         .pipe(gulpif(env === 'dev', sourcemaps.init()))
         .pipe(concat('main.min.js'), {newLine: ';'})
         .pipe(gulpif(env === 'prod', babel({
@@ -85,9 +85,9 @@ task('watch', () => {
 });
 
 task('build',
- series(
-   'clean',
-   parallel('copy:html', 'styles', 'img', 'fonts', 'scripts'))
+    series(
+        'clean',
+        parallel('copy:html', 'styles', 'img', 'fonts', 'scripts'))
 );
 
 task( 'default',

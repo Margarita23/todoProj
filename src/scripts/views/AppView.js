@@ -3,9 +3,9 @@ class AppView extends Backbone.View {
     events() {
         return {
             'click #app__title' : 'showInputChangeTitleWithBtn',
-            'click #change-title__btn--cancel' : 'hideInputChangeTitleWithBtn',
-            'click #change-title__btn--submit' : 'changeTitle',
-            'click #todo__add-btn' : 'addNewTodo',
+            'click .change-title__btn--cancel' : 'hideInputChangeTitleWithBtn',
+            'click .change-title__btn--submit' : 'changeTitle',
+            'click #todo__add-btn' : 'addNewTodo'
         };
     }
 
@@ -15,18 +15,17 @@ class AppView extends Backbone.View {
                 <div class="title__block">
                     <h1 id="app__title" class="app__title" name="title"></h1>
                     <div class="change-title__block">
-                        <input type="text" name="title" id="change-title__input" class="change-title__input" placeholder="enter title">
+                        <input type="text" class="change-title__input" placeholder="enter title">
                         <div class="change__btns">
-                            <button id="change-title__btn--submit" class="change-title__btn change-title__btn--submit" type="submit">Change Name</button>
-                            <button id="change-title__btn--cancel" class="change-title__btn change-title__btn--cancel" type="submit">X</button>
+                            <button class="change-title__btn change-title__btn--submit" type="submit">Change Name</button>
+                            <button class="change-title__btn change-title__btn--cancel" type="submit">X</button>
                         </div>
                     </div>
                 </div>
                 <div id="todos-container"></div>
-                
                 <button id="todo__add-btn" class="todo__add-btn" type="submit">Add Todo</button>
                 <div id="todo-list__block"><ul class="todo__list"></ul></div>
-            </div>`).bind(this);
+            </div>`);
     }
 
     initialize() {
@@ -35,7 +34,7 @@ class AppView extends Backbone.View {
         });
         this._modelBinder = new Backbone.ModelBinder();
         const viewFactory = new Backbone.CollectionBinder.ViewManagerFactory(function(model) {
-            return new TodoListView( { model } );
+            return new TodoListView({model});
         });
         this._collectionBinder = new Backbone.CollectionBinder(viewFactory);
         this.render();
@@ -54,24 +53,26 @@ class AppView extends Backbone.View {
     }
 
     showInputChangeTitleWithBtn(){
-        if($('.change-title__block').is(':hidden')){
+        const changeTitleBlock = this.$('.change-title__block');
+        if(changeTitleBlock.is(':hidden')){
             this.$('#app__title').slideUp(300);
-            this.$('.change-title__block').slideDown(1000);
+            changeTitleBlock.slideDown(1000);
         }
     }
 
     hideInputChangeTitleWithBtn(){
-        if($('.change-title__block').is(':visible')){
-            this.$('.change-title__block').slideToggle(300);
+        const changeTitleBlock = this.$('.change-title__block');
+        if(changeTitleBlock.is(':visible')){
+            changeTitleBlock.slideToggle(300);
             this.$('#app__title').slideDown(1000);
         }
     }
 
     changeTitle() {
-        const inputVal = this.$('#change-title__input').val();
+        const inputVal = this.$('.change-title__input').val();
         if(!!inputVal) {
             this.hideInputChangeTitleWithBtn();
+            this.model.set('title', inputVal); 
         }
     }
-
 }

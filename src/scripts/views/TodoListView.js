@@ -6,8 +6,7 @@ class TodoListView extends Backbone.View {
             'click .text__change-btn--cancel' : 'hideInputChangeTitleWithBtn',
             'click .text__change-btn--submit' : 'changeTitle',
             'click .todo__btn--remove' : 'removeTodoList',
-            'click .todo__btn--add' : 'addTodoItem',
-            'click .text__change-btn--cancel' : 'hideInputChangeTitleWithBtn',
+            'click .todo__btn--add' : 'addTodoItem'
         };
     }
 
@@ -49,27 +48,26 @@ class TodoListView extends Backbone.View {
         const inputVal = this.$('.todo-title__input').val();
         if(!!inputVal) {
             this.hideInputChangeTitleWithBtn();
-            setTimeout(() => { 
-                this.model.set('title', inputVal); 
-            }, 300);
+            this.model.set('title', inputVal); 
         }
     }
 
     removeTodoList() {
         this.remove();
-        this.unbind();
     }
 
     showInputChangeTitleWithBtn(){
-        if($('.todo__change-block').is(':hidden')){
+        const todoChangeBlock = this.$('.todo__change-block');
+        if(todoChangeBlock.is(':hidden')){
             this.$('.todo__title').slideUp(300);
-            this.$('.todo__change-block').slideDown(1000);
+            todoChangeBlock.slideDown(1000);
         }
     }
 
     hideInputChangeTitleWithBtn() {
-        if($('.todo__change-block').is(':visible')){
-            this.$('.todo__change-block').slideToggle(300);
+        const todoChangeBlock = this.$('.todo__change-block');
+        if(todoChangeBlock.is(':visible')){
+            todoChangeBlock.slideToggle(300);
             this.$('.todo__title').slideDown(1000);
         }
     }

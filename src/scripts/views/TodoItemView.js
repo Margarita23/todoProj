@@ -41,27 +41,26 @@ class TodoItemView extends Backbone.View {
         const inputVal = this.$('.task-title__input').val();
         if(!!inputVal) {
             this.hideInputChangeTitleWithBtn();
-            setTimeout(() => { 
-                this.model.set('title', inputVal); 
-            }, 300);
+            this.model.set('title', inputVal); 
         }
     }
     
     removeTask() {
         this.remove();
-        this.unbind();
     }
 
     showInputChangeTitleWithBtn(){
-        if($('.task__change-block').is(':hidden')){
+        const taskChangeBlock = this.$('.task__change-block');
+        if(taskChangeBlock.is(':hidden')){
             this.$('.task__title').slideUp(300);
-            this.$('.task__change-block').slideDown(1000);
+            taskChangeBlock.slideDown(1000);
         }
     }
     
     hideInputChangeTitleWithBtn() {
-        if($('.task__change-block').is(':visible')){
-            this.$('.task__change-block').slideToggle(300);
+        const taskChangeBlock = this.$('.task__change-block');
+        if(taskChangeBlock.is(':visible')){
+            taskChangeBlock.slideToggle(300);
             this.$('.task__title').slideDown(1000);
         }
     }

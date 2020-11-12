@@ -34,15 +34,9 @@ class AppView extends Backbone.View {
             todos: new TodoListsCollection([])
         });
         this._modelBinder = new Backbone.ModelBinder();
-        
-        // const liHtml = `<li class="todo__item"=><span name="title"></span></li>`;
-        // const elManagerFactory = new Backbone.CollectionBinder.ElManagerFactory(liHtml, 'name');
-        // this._collectionBinder = new Backbone.CollectionBinder(elManagerFactory);
-
         const viewFactory = new Backbone.CollectionBinder.ViewManagerFactory(function(model) {
             return new TodoListView( { model } );
         });
-
         this._collectionBinder = new Backbone.CollectionBinder(viewFactory);
         this.render();
     }
@@ -50,7 +44,6 @@ class AppView extends Backbone.View {
     render(){
         this.$el.html(this.template());
         this._modelBinder.bind(this.model, this.el);
-
         this._collectionBinder.bind(this.model.get('todos'), this.$('#todos-container'));
         $('#app').append(this.el);
         return this;

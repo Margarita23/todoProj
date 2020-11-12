@@ -249,6 +249,7 @@ template {
   height: 90%;
   position: absolute;
   border: none;
+  border-bottom: 1px solid #ddd;
   padding: 10px 195px 10px 20px;
   box-sizing: border-box;
   outline: none;

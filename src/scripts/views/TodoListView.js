@@ -17,7 +17,7 @@ class TodoListView extends Backbone.View {
                 <button class="todo__btn todo__btn--remove" type="submit">X</button>
                 <h2 name="title" class="todos__title"></h2>
                 <div class="todo__change-block">
-                    <input type="text" name="title" class="todo-title__input">
+                    <input type="text" class="todo-title__input">
                     <div class="change__btns change__btns--todo">
                         <button class="text__change-btn text__change-btn--submit" type="submit">Change Text</button>
                         <button class="text__change-btn text__change-btn--cancel" type="submit">X</button>
@@ -49,6 +49,9 @@ class TodoListView extends Backbone.View {
         const inputVal = this.$('.todo-title__input').val();
         if(!!inputVal) {
             this.hideInputChangeTitleWithBtn();
+            setTimeout(() => { 
+                this.model.set('title', inputVal); 
+            }, 300);
         }
     }
 

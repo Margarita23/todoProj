@@ -16,7 +16,7 @@ class TodoItemView extends Backbone.View {
                     <button class="task__btn--remove" type="submit">X</button>
                     <h3 class="task__title" name="title"></h3>
                     <div class="task__change-block">
-                        <input type="text" name="title" class="task-title__input">
+                        <input type="text" class="task-title__input">
                         <div class="change__btns change__btns--todo">
                             <button class="text__change-btn text__change-btn--submit" type="submit">Change Text</button>
                             <button class="text__change-btn text__change-btn--cancel" type="submit">X</button>
@@ -41,6 +41,9 @@ class TodoItemView extends Backbone.View {
         const inputVal = this.$('.task-title__input').val();
         if(!!inputVal) {
             this.hideInputChangeTitleWithBtn();
+            setTimeout(() => { 
+                this.model.set('title', inputVal); 
+            }, 300);
         }
     }
     

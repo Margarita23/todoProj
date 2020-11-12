@@ -1,5 +1,8 @@
 class TodoList extends Backbone.Model {
     initialize() {
-        this.title = 'ToDo List Name';
+    }
+
+    defaults(){
+        return {title: "ToDo List Name", items: []}
     }
 }

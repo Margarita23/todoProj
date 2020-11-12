@@ -1,0 +1,54 @@
+.todos__item {
+    border: 2px solid #ccc;
+    margin: 10px 0px;
+    position: relative;
+}
+
+.task__title {
+    position: absolute;
+}
+
+.todo__btn--add {
+    border: none;
+    padding: 10px 15px;
+    cursor: point;
+    background-color: #ddd;
+    outline: none;
+    
+    &:hover {
+        background-color: #aef3ac;
+    }
+}
+
+.task__btn--remove {
+    border: none;
+    padding: 10px 15px;
+    cursor: point;
+    background-color: #ddd;
+    outline: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    
+    &:hover {
+        background-color: #f3acac;
+    }
+}
+
+.task__change-block {
+    position: relative;
+    display: none;
+    width: 350px;
+    height: 70px;
+}
+
+.task-title__input {
+    height: 90%;
+    position: absolute;
+    border: none;
+    padding: 10px 195px 10px 20px;
+    box-sizing: border-box;
+    outline: none;
+    top: 50%;
+    transform: translateY(-50%);
+}

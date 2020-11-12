@@ -2,7 +2,7 @@
   "name": "todoproj",
   "version": "1.0.0",
   "description": "App for business to write your todo list",
-  "main": "index.js",
+  "module": "commonjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "gulp": "cross-env NODE_ENV=dev gulp",
@@ -33,7 +33,8 @@
     "gulp-uglify": "^3.0.2",
     "jquery": "^3.5.1",
     "style-loader": "^2.0.0",
-    "underscore": "^1.11.0"
+    "underscore": "^1.11.0",
+    "underscore-template-loader": "^1.1.0"
   },
   "devDependencies": {
     "gulp-browserify": "^0.5.1",

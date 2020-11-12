@@ -7,13 +7,13 @@ const concat = require('gulp-concat');
 const browserSync = require('browser-sync').create();
 const reload = browserSync.reload;
 const sassGlob = require('gulp-sass-glob');
-// const autoprefixer = require('gulp-autoprefixer');
 const gcmq = require('gulp-group-css-media-queries');
 const cleanCSS = require('gulp-clean-css');
 const sourcemaps = require('gulp-sourcemaps');
 const babel = require('gulp-babel');
 const uglify = require('gulp-uglify');
 const gulpif = require('gulp-if');
+const templateLoader = require('underscore-template-loader');
 
 const {SRC_PATH, DIST_PATH, STYLE_LIBS, JS_LIBS} = require('./gulp.config');
 const env = process.env.NODE_ENV;
@@ -25,7 +25,6 @@ task('clean', () => {
       .pipe(rm())
    })
 
-// replace img
 task('img', () =>{
     return src(`${SRC_PATH}/assets/images/**/*.*`)
         .pipe(dest(`${DIST_PATH}/assets/images/`));
@@ -37,7 +36,7 @@ task('fonts', () =>{
 });
 
 task('copy:html', () => {
-    return src(`${SRC_PATH}/*.html`)
+    return src([`src/scripts/tpls/*.html`, `${SRC_PATH}/*.html`])
         .pipe(dest(DIST_PATH))
         .pipe(reload({ stream: true}));
 })

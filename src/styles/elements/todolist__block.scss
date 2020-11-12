@@ -1,8 +1,9 @@
 
-ul.todo__list {
+.todo__list {
     list-style-type: none;
     padding: 0;
     margin: 30px 50px;
+    padding-inline-start: 0px;
 }
 
 .todo__item:nth-child(odd){
@@ -17,7 +18,7 @@ ul.todo__list {
     align-items: center;
 }
 
-.todo__remove-btn {
+.todo__btn--remove {
     border: none;
     padding: 10px 15px;
     cursor: point;
@@ -26,7 +27,6 @@ ul.todo__list {
     position: absolute;
     top: 0;
     right: 0;
-    
 
     &:hover {
         background-color: #f3acac;

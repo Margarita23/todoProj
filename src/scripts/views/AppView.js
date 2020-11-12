@@ -13,31 +13,51 @@ class AppView extends Backbone.View {
         return _.template(
             `<div class="app__template">
                 <div class="title__block">
-                    <h1 id="app__title" class="app__title"><%= this.model.title %></h1>
+                    <h1 id="app__title" class="app__title" name="title"></h1>
                     <div class="change-title__block">
-                        <input type="text" name="mainTitle" id="change-title__input" class="change-title__input" placeholder="<%= this.model.title %>">
+                        <input type="text" name="title" id="change-title__input" class="change-title__input" placeholder="enter title">
                         <div class="change__btns">
                             <button id="change-title__btn--submit" class="change-title__btn change-title__btn--submit" type="submit">Change Name</button>
                             <button id="change-title__btn--cancel" class="change-title__btn change-title__btn--cancel" type="submit">X</button>
                         </div>
                     </div>
                 </div>
+                <div id="todos-container"></div>
+                
                 <button id="todo__add-btn" class="todo__add-btn" type="submit">Add Todo</button>
-                <div id="todo-list__block"></div>
+                <div id="todo-list__block"><ul class="todo__list"></ul></div>
             </div>`).bind(this);
     }
 
     initialize() {
-        this._todoList = new TodoListsCollection();
-        this.listenTo(this.model, 'change', this.render);
+        this.model = new App({
+            todos: new TodoListsCollection([])
+        });
+        this._modelBinder = new Backbone.ModelBinder();
+        
+        // const liHtml = `<li class="todo__item"=><span name="title"></span></li>`;
+        // const elManagerFactory = new Backbone.CollectionBinder.ElManagerFactory(liHtml, 'name');
+        // this._collectionBinder = new Backbone.CollectionBinder(elManagerFactory);
+
+        const viewFactory = new Backbone.CollectionBinder.ViewManagerFactory(function(model) {
+            return new TodoListView( { model } );
+        });
+
+        this._collectionBinder = new Backbone.CollectionBinder(viewFactory);
         this.render();
-        this.renderTodoList();
     }
-     
+        
     render(){
         this.$el.html(this.template());
+        this._modelBinder.bind(this.model, this.el);
+
+        this._collectionBinder.bind(this.model.get('todos'), this.$('#todos-container'));
         $('#app').append(this.el);
         return this;
+    }
+
+    addNewTodo() {
+        this.model.get('todos').add(new TodoList());
     }
 
     showInputChangeTitleWithBtn(){
@@ -56,21 +76,9 @@ class AppView extends Backbone.View {
 
     changeTitle() {
         const inputVal = this.$('#change-title__input').val();
-
         if(!!inputVal) {
             this.hideInputChangeTitleWithBtn();
-            setTimeout(() => { 
-                this.model.title = inputVal; 
-                this.$el.html(this.template()); 
-            }, 300);
         }
     }
 
-    renderTodoList() {
-        new TodoListView({collection: this._todoList});
-    }
-
-    addNewTodo() {
-        this._todoList.add(new TodoList());
-    }
 }

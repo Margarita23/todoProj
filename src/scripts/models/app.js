@@ -1,5 +1,8 @@
 class App extends Backbone.Model {
     initialize() {
-        this.title = 'ToDo App';
+    }
+
+    defaults(){
+        return {title: 'todo', todos: []}
     }
 }
